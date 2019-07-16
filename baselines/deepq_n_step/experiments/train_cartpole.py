@@ -15,7 +15,7 @@ def callback(lcl, _glb):
 
 def main(env_name, seed, exp_name, n_step):
     data_dir = osp.join(osp.dirname(osp.dirname(osp.dirname(osp.dirname(osp.dirname(osp.abspath(__file__)))))),
-                        'spinup_data', datetime.datetime.now().strftime("openai-%Y-%m-%d-%H-%M-%S_") + exp_name)
+                        'baselines_dqn_data', datetime.datetime.now().strftime("openai-%Y-%m-%d-%H-%M-%S_") + exp_name)
     logger.configure(dir=data_dir)
     env = gym.make(env_name)
     act = deepq_n_step.learn(
