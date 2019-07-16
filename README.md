@@ -1,3 +1,6 @@
+# openai_baselines_extension
+This repository is an extension of OpenAi-baselines to realize n-step Deep Reinforcement Learning methods.
+
 **Status:** Active (under active development, breaking changes may occur)
 
 <img src="data/logo.jpg" width=25% align="right" /> [![Build status](https://travis-ci.org/openai/baselines.svg?branch=master)](https://travis-ci.org/openai/baselines)
