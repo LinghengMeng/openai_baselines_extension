@@ -82,7 +82,7 @@ class ReplayBuffer(object):
         """
         idxes = np.random.randint(0, len(self._storage) -(n_step-1), size=batch_size)
 
-        if len(self._storage[0][0].shape)>2:
+        if len(np.asarray(self._storage[0][0]).shape)>2:
             task_type = 'Atari'
         else:
             task_type = 'Classic'
