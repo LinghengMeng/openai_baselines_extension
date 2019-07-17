@@ -6,17 +6,18 @@ import os.path as osp
 import datetime
 import argparse
 
-def main(exp_name, n_step):
+def main(env_name, seed, n_step, exp_name):
     data_dir = osp.join(osp.dirname(osp.dirname(osp.dirname(osp.dirname(osp.dirname(osp.abspath(__file__)))))),
-                        'spinup_data', datetime.datetime.now().strftime("openai-%Y-%m-%d-%H-%M-%S_")+exp_name)
+                        'dqn_Atari', datetime.datetime.now().strftime("openai-%Y-%m-%d-%H-%M-%S_")+exp_name)
     logger.configure(dir=data_dir)
-    env = make_atari('PongNoFrameskip-v4')
+    env = make_atari(env_name)
     env = bench.Monitor(env, logger.get_dir())
     env = deepq_n_step.wrap_atari_dqn(env)
 
     model = deepq_n_step.learn(
         env,
         "conv_only",
+        seed=seed,
         convs=[(32, 8, 4), (64, 4, 2), (64, 3, 1)],
         hiddens=[256],
         dueling=True,
@@ -37,7 +38,9 @@ def main(exp_name, n_step):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('--env_name', type=str, default='PongNoFrameskip-v4')
+    parser.add_argument('--seed', type=int, default=0)
     parser.add_argument('--exp_name', type=str, default='dqn_n_step')
     parser.add_argument('--n_step', type=int, default=1)
     args = parser.parse_args()
-    main(exp_name=args.exp_name, n_step=args.n_step)
+    main(env_name=args.env_name, seed=args.seed, n_step=args.n_step, exp_name=args.exp_name)

@@ -13,9 +13,9 @@ def callback(lcl, _glb):
     return is_solved
 
 
-def main(env_name, seed, exp_name, n_step):
+def main(env_name, seed, n_step, exp_name):
     data_dir = osp.join(osp.dirname(osp.dirname(osp.dirname(osp.dirname(osp.dirname(osp.abspath(__file__)))))),
-                        'openai_dqn_data', datetime.datetime.now().strftime("openai-%Y-%m-%d-%H-%M-%S_") + exp_name)
+                        'openai_dqn_classic', datetime.datetime.now().strftime("openai-%Y-%m-%d-%H-%M-%S_") + exp_name)
     logger.configure(dir=data_dir)
     env = gym.make(env_name)
     act = deepq_n_step.learn(
@@ -41,4 +41,4 @@ if __name__ == '__main__':
     parser.add_argument('--exp_name', type=str, default='dqn_n_step')
     parser.add_argument('--n_step', type=int, default=1)
     args = parser.parse_args()
-    main(env_name=args.env_name, seed=args.seed, exp_name=args.exp_name, n_step=args.n_step)
+    main(env_name=args.env_name, seed=args.seed, n_step=args.n_step, exp_name=args.exp_name)
