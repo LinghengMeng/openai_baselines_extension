@@ -228,7 +228,7 @@ def learn(env,
                                        initial_p=prioritized_replay_beta0,
                                        final_p=1.0)
     else:
-        replay_buffer = ReplayBuffer(buffer_size, env.observation_space.shape[0])
+        replay_buffer = ReplayBuffer(buffer_size, env.observation_space.shape[0], 1)
         beta_schedule = None
     # Create the schedule for exploration starting from 1.
     exploration = LinearSchedule(schedule_timesteps=int(exploration_fraction * total_timesteps),
